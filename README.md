@@ -259,7 +259,7 @@ if __name__ == '__main__':
 
 The latest release can be installed using pip
 ```terminal
-pip install ipca
+pip install qmoms
 ```
 
 ## Requirements
