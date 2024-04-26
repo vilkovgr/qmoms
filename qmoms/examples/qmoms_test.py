@@ -61,7 +61,6 @@ Notes:
 Please write me with any comments on vilkov@vilkov.net
 
 """
-import numpy as np
 # %% Load Variables and Dataframes
 # import packages and variables
 import pandas as pd

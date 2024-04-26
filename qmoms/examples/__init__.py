@@ -31,7 +31,7 @@ def load_data(surf_dtype_mapping=default_surf_dtype_mapping,
     df_surf, df_rate = load_data()
     ```
     """
-    data_files = files('data')
+    data_files = files('qmoms').joinpath('data')
     df_surf = pd.read_csv(data_files / 'surface.csv', sep=',', dtype=surf_dtype_mapping)
     df_surf['date'] = pd.to_datetime(df_surf['date'], format=surf_date_format, errors='coerce')
     df_surf['delta'] = df_surf['delta'] / 100
