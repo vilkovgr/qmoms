@@ -292,12 +292,15 @@ if __name__ == '__main__':
     print(out_s)
 ```
 
-## Installing
 
-The latest release can be installed using pip
-```terminal
-pip install qmoms
+## Installation 
+
+You can install the package master branch directly from GitHub with:
+
+```bash
+pip install git+https://github.com/vilkovgr/qmoms.git
 ```
+
 
 ## Requirements
 
@@ -310,13 +313,15 @@ pip install qmoms
 Older versions might work, but were not tested. 
 
 ## Other Channels and Additional Data
-Precomputed moments and other data 
+Precomputed moments and other data are available through the OSF repository at https://osf.io/8awyu/  
+
+Feel free to load and use in your projects:  
 * Generalized lower bounds as in Chabi-Yo, Dim, Vilkov (MS, 2023) / https://ssrn.com/abstract=3565130 
 * Option-implied betas as in Buss and Vilkov (RFS, 2012) / https://ssrn.com/abstract=1301437 
 * Options-implied correlations as in Driessen, Maenhout, Vilkov (JF, 2009) / https://ssrn.com/abstract=2166829 
 * Climate change exposure measures as in Lent, Sautner, Zhang, and Vilkov (JF, MS, 2023) / https://ssrn.com/abstract=3792366 
 and https://ssrn.com/abstract=3642508 
-are also available through the OSF repository at https://osf.io/8awyu/ -- feel free to load and use in your projects.  
+ 
 
 ## Acknowledgements
 
