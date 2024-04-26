@@ -2,6 +2,36 @@
 
 This is a Python implementation of a set of option-implied characteristics.
 
+## Scope
+The package contains functions to compute option-implied moments and characteristics from implied volatility surface data. 
+The computations are based on the out-the-money (OTM) implied volatilities, interpolated as function of moneyness 
+(Strike/Underlying Price or Strike/ Forward Price) within the avaialable moneyness range and set to the boundary values 
+outside to fill in the pre-specified moneyness range. OTM is defined as moenyess>=1 for calls and <1 for puts. 
+
+The following moments and characteristics are computed: 
+1. Model-free implied variance (log contract):
+   * `MFIV_BKM` using Bakshi, Kapadia, and Madan (RFS, 2003) / https://doi.org/10.1093/rfs/16.1.0101
+   * `MFIV_BJN` using Britten-Jones and Neuberger (JF, 2002) / https://doi.org/10.1111/0022-1082.00228
+2. Simple model-free implied variance 
+   * `SMFIV` using Martin (QJE, 2017) / https://doi.org/10.1093/qje/qjw034
+3. Corridor VIX 
+   * `CVIX` using Andersen, Bondarenko, and Gonzalez-Perez (RFS, 2015) / https://doi.org/10.1093/rfs/hhv033
+4. Tail Loss Measure 
+   * `TLM` using Vilkov, Xiao (2012) / https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1940117 and Hamidieh (Journal of Risk, 2017) /
+     https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2209654
+5. Semivariances (only down) for log and simple contracts 
+    * Following Feunou, Jahan-Parvar,and Okou, (Journal of Fin Econometrics, 2017) / https://doi.org/10.1093/jjfinec/nbx020
+    * Up semivariances can be computed as the respective total variance minus down semivariance
+6. Tail jump measure 
+   * `RIX` using Gao, Gao and Song, (RFS, 2018) / https://doi.org/10.1093/rfs/hhy027
+7. Ad hoc tail measures (smile steepness for the tails) 
+   * Slopeup (right tail) and Slopedn (left tail) measure right and left tail slope, respectively. Larger values indicate 
+   more expensive tail relative to the at-the-money level. 
+   * Used in Carbon Tail Risk, Ilhan, Sautner, and Vilkov, (RFS, 2021) / https://doi.org/10.1093/rfs/hhaa071 and
+   Pricing Climate Change Exposure, v.Lent, Sautner, Zhang, and Vilkov, (Management Science, 2023) / https://doi.org/10.1287/mnsc.2023.4686
+   (mind the sign of slopeup -- we take '-Slope' here for better interpretability). 
+   Originally, Slopedn is used in Kelly, Pastor, Veronesi (JF, 2016) / https://doi.org/10.1111/jofi.12406 
+
 ## Usage
 
 Exemplary use of the `qmoms` package. The data is the provided with the package, and are composed of two files: 
