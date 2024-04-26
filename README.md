@@ -25,7 +25,7 @@ The following moments and characteristics are computed:
 6. Tail jump measure 
    * `RIX` using Gao, Gao and Song, (RFS, 2018) / https://doi.org/10.1093/rfs/hhy027
 7. Ad hoc tail measures (smile steepness for the tails) 
-   * Slopeup (right tail) and Slopedn (left tail) measure right and left tail slope, respectively. Larger values indicate 
+   * `Slopeup` (right tail) and `Slopedn` (left tail) measure right and left tail slope, respectively. Larger values indicate 
    more expensive tail relative to the at-the-money level. 
    * Used in Carbon Tail Risk, Ilhan, Sautner, and Vilkov, (RFS, 2021) / https://doi.org/10.1093/rfs/hhaa071 and
    Pricing Climate Change Exposure, v.Lent, Sautner, Zhang, and Vilkov, (Management Science, 2023) / https://doi.org/10.1287/mnsc.2023.4686
@@ -302,9 +302,18 @@ pip install qmoms
 
 Older versions might work, but were not tested. 
 
+## Other Channels and Additional Data
+Precomputed moments and other data 
+* Generalized lower bounds as in Chabi-Yo, Dim, Vilkov (MS, 2023) / https://ssrn.com/abstract=3565130 
+* Option-implied betas as in Buss and Vilkov (RFS, 2012) / https://ssrn.com/abstract=1301437 
+* Options-implied correlations as in Driessen, Maenhout, Vilkov (JF, 2009) / https://ssrn.com/abstract=2166829 
+* Climate change exposure measures as in Lent, Sautner, Zhang, and Vilkov (JF, MS, 2023) / https://ssrn.com/abstract=3792366 
+and https://ssrn.com/abstract=3642508 
+are also available through the OSF repository at https://osf.io/8awyu/ -- feel free to load and use in your projects.  
+
 ## Acknowledgements
 
-The implementation is inspired by the Python and MATLAB code for IPCA made available on [Grigory Vilkov's website](https://vilkov.net).
+The implementation is inspired by the Python and MATLAB code for implied moments made available on [Grigory Vilkov's website](https://vilkov.net).
 
 ***
 The package is still in the development phase, hence please share your comments and suggestions with us.
