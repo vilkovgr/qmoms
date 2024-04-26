@@ -133,11 +133,23 @@ def qmoms_compute(mnes, vol, days, rate, params, output='pandas'):
     """
 ```
 
-The second function `qmoms_compute_bygroup` computes the variables for a set of instances collected in a dataframe.
+The second function `qmoms_compute_bygroup` computes the variables for a set of instances collected in a DataFrame.
+Note that the input variable `groupparams` shall be a tuple or a list with the 0th element containing the 
+group (dataframe) and the 1st element being a dictionary with parameters. Asset `id`, current `date`, 
+maturity in `days`, and current `rate` in decimals p.a. can be provided as individual variables, or in the 
+group DataFrame. If these variables are provided directly to the function, they will take precedence over any values 
+provided within the DataFrame. 
+The DataFrame column names shall conform to the `cols_map` mapping.
+
 ```python
 def qmoms_compute_bygroup(groupparams,
                           id=None, rate=None, days=None, date=None,
-                          cols_map={'id': 'id', 'date': 'date', 'days': 'days', 'rate': 'rate'}):
+                          cols_map={'id': 'id',
+                                    'date': 'date',
+                                    'days': 'days',
+                                    'rate': 'rate',
+                                    'mnes': 'mnes',
+                                    'impl_volatility': 'impl_volatility'}):
     """
     Computes implied moments for grouped option data using specified parameters and column mappings.
 
@@ -153,7 +165,8 @@ def qmoms_compute_bygroup(groupparams,
     - date (any, optional): Date of the data, defaults to the first 'date' in the group data as specified in cols_map
     if not provided.
     - cols_map (dict, optional): A dictionary mapping the expected columns in the group data to the actual column names.
-    Default is {'id': 'id', 'date': 'date', 'days': 'days', 'rate': 'rate'}.
+    Default is {'id': 'id', 'date': 'date', 'days': 'days', 'rate': 'rate',
+                'mnes': 'mnes', 'impl_volatility': 'impl_volatility'}.
 
     Returns:
     - pandas.Series: Contains the computed moments along with initial group identifiers such as id, date, and days.
@@ -162,7 +175,12 @@ def qmoms_compute_bygroup(groupparams,
     It then merges the computed moments with initial data identifiers and returns a pandas Series, using the column
     mappings specified in cols_map for accessing data fields.
     """
-    cols_map = cols_map | {'id': 'id', 'date': 'date', 'days': 'days', 'rate': 'rate'}
+    cols_map = cols_map | {'id': 'id',
+                           'date': 'date',
+                           'days': 'days',
+                           'rate': 'rate',
+                           'mnes': 'mnes',
+                           'impl_volatility': 'impl_volatility'}
 
     if (isinstance(groupparams, tuple) or isinstance(groupparams, list)) and len(groupparams) == 2:
         group = groupparams[0]
@@ -178,8 +196,8 @@ def qmoms_compute_bygroup(groupparams,
 
     # the surface is given in two columns
     group = group.sort_values(by=['mnes'])
-    mnes = group.mnes
-    vol = group.impl_volatility
+    mnes = group[cols_map['mnes']]
+    vol = group[cols_map['impl_volatility']]
 
     # remove duplicated moneyness points
     goods = ~mnes.duplicated()
