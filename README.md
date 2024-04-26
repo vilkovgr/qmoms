@@ -57,7 +57,14 @@ default_rate_dtype_mapping = {'date': 'str',
 ```
 The default date format for these files is provided in `qmoms_params.py`: `default_date_format = '%d%b%Y'` 
 
-There are two main functions provided: `qmoms_compute()` and `qmoms_compute_bygroup`:
+To load the data, use the provided function `load_data()`
+```python
+from qmoms.examples import load_data
+df_surf, df_rate = load_data()
+```
+
+
+There are two main functions provided: `qmoms_compute()` and `qmoms_compute_bygroup()`:
 
 The first function computes a set of variables as specified in `params` dictionary for one instance of the surface 
 (i.e., one id/date/days combination).
