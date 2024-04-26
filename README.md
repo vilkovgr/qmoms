@@ -195,7 +195,7 @@ def qmoms_compute_bygroup(groupparams,
     rate = rate or group[cols_map['rate']].iloc[0]
 
     # the surface is given in two columns
-    group = group.sort_values(by=['mnes'])
+    group = group.sort_values(by=[cols_map['mnes']])
     mnes = group[cols_map['mnes']]
     vol = group[cols_map['impl_volatility']]
 
