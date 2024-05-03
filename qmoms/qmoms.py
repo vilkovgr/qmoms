@@ -72,12 +72,12 @@ def qmoms_compute_bygroup(groupparams,
     It then merges the computed moments with initial data identifiers and returns a pandas Series, using the column
     mappings specified in cols_map for accessing data fields.
     """
-    cols_map = cols_map | {'id': 'id',
-                           'date': 'date',
-                           'days': 'days',
-                           'rate': 'rate',
-                           'mnes': 'mnes',
-                           'impl_volatility': 'impl_volatility'}
+    cols_map = {'id': 'id',
+                'date': 'date',
+                'days': 'days',
+                'rate': 'rate',
+                'mnes': 'mnes',
+                'impl_volatility': 'impl_volatility'} | cols_map
 
     if (isinstance(groupparams, tuple) or isinstance(groupparams, list)) and len(groupparams) == 2:
         group = groupparams[0]

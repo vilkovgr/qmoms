@@ -175,45 +175,6 @@ def qmoms_compute_bygroup(groupparams,
     It then merges the computed moments with initial data identifiers and returns a pandas Series, using the column
     mappings specified in cols_map for accessing data fields.
     """
-    cols_map = cols_map | {'id': 'id',
-                           'date': 'date',
-                           'days': 'days',
-                           'rate': 'rate',
-                           'mnes': 'mnes',
-                           'impl_volatility': 'impl_volatility'}
-
-    if (isinstance(groupparams, tuple) or isinstance(groupparams, list)) and len(groupparams) == 2:
-        group = groupparams[0]
-        params = groupparams[1]
-    else:
-        params = groupparams
-
-    # scalars
-    id = id or group[cols_map['id']].iloc[0]
-    date = date or group[cols_map['date']].iloc[0]
-    days = days or group[cols_map['days']].iloc[0]
-    rate = rate or group[cols_map['rate']].iloc[0]
-
-    # the surface is given in two columns
-    group = group.sort_values(by=[cols_map['mnes']])
-    mnes = group[cols_map['mnes']]
-    vol = group[cols_map['impl_volatility']]
-
-    # remove duplicated moneyness points
-    goods = ~mnes.duplicated()
-    mnes = mnes[goods]
-    vol = vol[goods]
-
-    # pre-define the output dict
-    res = {'id': id, 'date': date, 'days': days}
-
-    # compute the moments with interpolation
-    res_computed = qmoms_compute(mnes, vol, days, rate, params, output='dict')
-
-    # update the output
-    res = res | res_computed
-
-    return pd.Series(res)
 ```
 
 The usage of both functions is illustrated below: 
